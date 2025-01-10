@@ -10,10 +10,10 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         HStack {
-            CardView()
-            CardView()
-            CardView()
             CardView(isFacedUp: true)
+            CardView()
+            CardView()
+            CardView()
 
         }
         .padding()
@@ -24,19 +24,27 @@ struct ContentView: View {
 
 
 struct CardView: View {
-    var isFacedUp: Bool = false
+    @State var isFacedUp = true
     var body: some View {
-        ZStack(content: { // similar to divs
+        ZStack { // similar to divs
+//            let base: RoundedRectangle = RoundedRectangle(cornerRadius: 12)
+            let base = RoundedRectangle(cornerRadius: 12) // Type inference in Swift
+
             if isFacedUp {
-                RoundedRectangle(cornerRadius: 12).foregroundStyle(.white)
-                RoundedRectangle(cornerRadius: 12)
+                base.foregroundStyle(.white)
+                base
                     .strokeBorder(lineWidth: 2)
                 Text("👽").font(.largeTitle)
             }
             else {
                 RoundedRectangle(cornerRadius: 12)
             }
-        })
+        }
+        .onTapGesture {
+            print("Tapped!")
+//            isFacedUp = !isFacedUp
+            isFacedUp.toggle() // to change from true to false and vise
+        }
     }
 }
 
