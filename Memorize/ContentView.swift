@@ -16,15 +16,17 @@ struct ContentView: View {
             cards
         }
         Spacer()
+        countCardsAdjuster
+    
+    }
+    var countCardsAdjuster: some View {
         HStack {
             cardRemover
             Spacer()
             cardAdder
         }.font(.largeTitle).padding()
-    
     }
-    
-    func cardCountAdjuster(by offset: Int, symbol: String) -> some View {
+    func addRemoveCards(by offset: Int, symbol: String) -> some View {
         Button(action: {
                 countCard += offset
         }, label: {
@@ -44,11 +46,11 @@ struct ContentView: View {
     }
     
     var cardRemover: some View {
-        cardCountAdjuster(by: -1, symbol: "rectangle.stack.badge.minus.fill")
+        addRemoveCards(by: -1, symbol: "rectangle.stack.badge.minus.fill")
     }
     
     var cardAdder: some View {
-        cardCountAdjuster(by: +1, symbol: "rectangle.stack.badge.plus.fill")
+        addRemoveCards(by: +1, symbol: "rectangle.stack.badge.plus.fill")
     }
 }
 
